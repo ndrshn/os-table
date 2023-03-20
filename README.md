@@ -36,7 +36,6 @@ import OsTable from 'os-table';
       size="small"
       stripe
       :loading="loading"
-      style="width: 100%"
     />
   </div>
 </template>
@@ -45,56 +44,51 @@ import OsTable from 'os-table';
 import { ref } from "vue";
 
 const data = ref([]);
-const loading = ref(false);
-const columns = ref([]);
+const columns = [
+  {
+    title: "id",
+    key: "id",
+    align: "center",
+    width: 50,
+    sortType: "normal",
+  },
+  {
+    title: "firstName",
+    key: "firstName",
+    icon: "user",
+    sortType: "normal",
+  },
+  {
+    title: "lastName",
+    key: "lastName",
+    icon: "user",
+    sortType: "normal",
+  },
+  {
+    title: "email",
+    key: "email",
+    icon: "mail",
+    sortType: "normal",
+  },
+  {
+    title: "company.name",
+    key: "company.name",
+    icon: "building",
+  },
+  {
+    title: "address.coordinates",
+    key: "address.coordinates",
+    icon: "map-pin",
+  },
+];
 
 const getData = async () => {
   loading.value = true;
-  await fetch("/api/products")
+  await fetch("/api/users")
     .then((res) => res.json())
     .then((res) => {
-      data.value = res.products;
+      data.value = res.users;
     });
-  const filters = await fetch("/api/products/categories")
-    .then((res) => res.json())
-    .then((res) => res);
-  columns.value = [
-    {
-      title: "id",
-      key: "id",
-      align: "center",
-      width: 30,
-      sortType: "normal",
-    },
-    {
-      title: "Title",
-      key: "title",
-      sortType: "normal",
-    },
-    {
-      title: "Description",
-      key: "description",
-    },
-    {
-      title: "Category",
-      key: "category",
-      meta: {
-        filterType: "select",
-        filters,
-      },
-      width: 120,
-    },
-    {
-      title: "stock",
-      key: "stock",
-      align: "right",
-    },
-    {
-      title: "Price",
-      key: "price",
-      sortType: "normal",
-    },
-  ];
   loading.value = false;
 };
 
