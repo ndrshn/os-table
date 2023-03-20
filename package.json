@@ -1,6 +1,6 @@
 {
   "name": "os-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "A datatable library with Vue.js and AT-UI",
   "homepage": "https://github.com/ndrshn/os-table",
