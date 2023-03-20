@@ -1,6 +1,5 @@
 {
-  "name": "osui",
-  "private": true,
+  "name": "os-table",
   "version": "1.0.0",
   "type": "module",
   "description": "A datatable library with Vue.js and AT-UI",
