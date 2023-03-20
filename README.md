@@ -104,4 +104,4 @@ getData();
 
 ## Preview
 
-[![os-table](os-table.png)]
+![os-table](os-table.png)
