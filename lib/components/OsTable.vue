@@ -7,7 +7,7 @@
     [`os-table--${props.size}`]: props.size,
     [`os-table--border`]: props.border,
   }" :style="tableStyles">
-    <div class="os-table-header" v-if="slots.header">
+    <div v-if="slots.header" class="os-table-header">
       <os-row>
         <os-col :span="24">
           <slot name="header"></slot>
@@ -119,8 +119,8 @@
                       :key="_index"
                       :label="opt"
                       :value="opt"
-                                              />
-                                            </os-select-->
+                                                            />
+                                                          </os-select-->
                 </template>
               </td>
             </tr>
@@ -177,10 +177,10 @@
         <os-col :span="24" style="display: flex; justify-content: center">
           <os-pagination v-if="props.pagination" :current="currentPage" :size="props.size" circle :total="allData.length"
             :page-size="props.pageSize" :show-total="props.showPageTotal" :show-sizer="props.showPageSizer"
-            :show-quickjump="props.showPageQuickjump" @page-change="pageChange" @pagesize-change="pageSizeChange"
-            style="width: fit-content" />
+            :show-quickjump="props.showPageQuickjump" style="width: fit-content" @page-change="pageChange"
+            @pagesize-change="pageSizeChange" />
         </os-col>
-        <os-col :span="24" v-if="slots.footer">
+        <os-col v-if="slots.footer" :span="24">
           <slot name="footer"></slot>
         </os-col>
       </os-row>
@@ -205,6 +205,7 @@ import OsCheckbox from "./OsCheckbox.vue";
 import OsPagination from "./OsPagination.vue";
 import OsInput from "./OsInput.vue";
 import OsLoader from "./OsLoader.vue";
+import OsCol from "./OsCol.vue";
 
 const emit = defineEmits([
   "on-select-all",
@@ -226,6 +227,7 @@ const props = defineProps({
   },
   sticky: {
     type: Number,
+    default: 0
   },
   border: {
     type: Boolean,
@@ -565,12 +567,6 @@ const onSearch = (value, event) => {
   );
 };
 
-const onSelectChange = (key, value) => {
-  filteredData.value = props.data.filter((el) =>
-    el[key].toString().toLowerCase().includes(String(value).toLowerCase())
-  );
-};
-
 const getProp = (obj, prop) => {
   const parts = prop.split(".");
   if (parts && parts.length > 0) {
@@ -603,7 +599,7 @@ watch(
 
 watch(
   () => props.loading,
-  (newValue, oldValue) => {
+  (newValue) => {
     loading.value = newValue;
   }
 );
@@ -611,20 +607,7 @@ watch(
 watch(allData, () => {
   total.value = allData.value.length;
 });
-
-watch(sortData, () => {
-  handleResize();
-});
-
-watch(pageCurSize, () => {
-  sortData.value = makeDataWithPaginate();
-});
-
-watch(filteredData, () => {
-  sortData.value = makeDataWithSortAndPage();
-});
 </script>
-
 <style>
 .os-table {
   position: relative;
@@ -825,4 +808,4 @@ watch(filteredData, () => {
   margin: 0 !important;
   padding: 12px;
 }
-</style>
+</style >
