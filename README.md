@@ -95,4 +95,4 @@ getData();
 
 ## Preview
 
-![os-table](os-table.png)
+![os-table](https://raw.githubusercontent.com/ndrshn/os-table/master/os-table.png)
