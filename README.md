@@ -10,16 +10,13 @@ First install the library with following code:
 npm i os-table
 ```
 
-Then:
+Then, in `main.js`:
 
 ```js
-<template>
-  <os-table :data="data" :columns="columns" />
-<template>
+import OsTable from "os-table";
+import "os-table/dist/style.css";
 
-<script setup>
-import OsTable from 'os-table';
-<script>
+app.use(OsTable);
 ```
 
 ## Example Code
